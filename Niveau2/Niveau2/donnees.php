@@ -1,3 +1,2 @@
 <?php
-$mysqli = new mysqli("localhost", "root", "root", "socialnetwork_tests");
-?>
+$mysqli = new mysqli("localhost", "root", "<YOUR_PASSWORD_HERE>", "socialnetwork");
