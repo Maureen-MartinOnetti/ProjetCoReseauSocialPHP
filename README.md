@@ -75,11 +75,11 @@ Ce projet est un réseau social inspiré de plateformes comme Twitter et Faceboo
 
 ## Captures d'écran
 
-![Exemple de page d'accueil](<Mettre le lien d'une capture d'écran ici>)
+[![Exemple de page d'accueil](https://i.goopics.net/9jxls8.jpg)](https://goopics.net/i/9jxls8)
 _Page d'accueil_
 
-![Exemple de page de messages](<Mettre le lien d'une capture d'écran ici>)
-_Page de messages_
+[![Example de la page mur](https://i.goopics.net/ils8x4.jpg)](https://goopics.net/i/ils8x4)
+_Page mur_
 
 ## Crédits
 
