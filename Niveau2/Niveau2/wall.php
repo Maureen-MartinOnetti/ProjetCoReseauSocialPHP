@@ -50,26 +50,68 @@ session_start();
                 <p>Sur cette page vous trouverez tous les message de l'utilisatrice :
                     n° <?php echo $user["id"] ?>.
                     <?php echo $user["alias"] ?>
+
                     <?php
                     if ($_SESSION['connected_id'] == $user['id']) {
-                        echo "<p> C'est mon mur, je peux publier. </p>";
-                    } else {
-                        echo "<p> Ce n'est pas mon mur.</p>";
+                        echo "<p>Publier un message. </p>";
                     }
                     ?>
-                    <!-- <dt><label for='nouveau message'>Nouveau message :</label></dt>
-                        <dd><input type='nouveau message'name='newmsg'></dd>
-                        <input type="submit"> -->
+
+
                 </p>
 
-                <!-- <?php
-                        if ($connectedUserId == $wallUserId) {
-                            echo '<form action="user.php" method="post">
-                    <textarea name="message" placeholder="Écrivez un message..."></textarea>
-                    <button type="submit">Publier</button>
-                    </form>';
+
+                <!-- ÉTAPE 5 -->
+                <?php
+                function debug_to_console($data)
+                {
+                    $output = $data;
+                    if (is_array($output))
+                        $output = implode(',', $output);
+
+                    echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
+                }
+
+                if (isset($_POST['followForm'])) {
+                    $verificationSQL = "SELECT * FROM followers WHERE followed_user_id = '" . $_SESSION['connected_id'] . "'AND following_user_id = '" . $userId . "'";
+                    $isFollowing = $mysqli->query($verificationSQL);
+                    if ($isFollowing->num_rows == 0) {
+                        $instructionSQL = "INSERT INTO followers "
+                            . "(id, followed_user_id, following_user_id) "
+                            . "VALUES (NULL, "
+                            . $_SESSION['connected_id'] . ", "
+                            . "'" . $userId . "');";
+
+                        $ok = $mysqli->query($instructionSQL);
+                        if (!$ok) {
+                            echo "Impossible de follow cet utilisateur: " . $mysqli->error;
+                        } else {
+                            echo "vous suivez cet utilisateur:" . $user['alias'];
+                            // header('Refresh:0; url=wall.php?user_id=' . $userId);
                         }
-                        ?> -->
+                    } else {
+                        echo "vous suivez déjà cette personne";
+                    }
+                }
+                ?>
+
+                <div <?php
+                        if ($_SESSION['connected_id'] == $user['id']) {
+                            echo " style='display: none'";
+                        }
+                        ?>>
+                    <article>
+                        <form action="" method="post">
+                            <input type='hidden' name="followForm">
+                            <input type='submit' value="Follow"></input>
+                        </form>
+                    </article>
+                </div>
+
+
+                <!-- FIN étape 5 -->
+
+
 
             </section>
         </aside>
